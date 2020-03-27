@@ -59,7 +59,7 @@
 
     \section{What is PCA?}
     In the real world, datasets may contain hundreds of attributes and naturally, some attributes will be more important than others. PCA aims to help with simplifying high-dimensional data by reducing the number of dimensions while preserving the essence of the data. \par
-    In order to reduce the dimensionality of the feature space PCA introduces new variables (principal components) that are orthogonal to each other. A principal component is a linear combination of the original predictor variables which captures the maximum variance in the data set. A downside of the resulting principal components being a complex mixture of the original features is that interpreting them can prove difficult.\par
+    In order to reduce the dimensionality of the feature space PCA introduces new variables (principal components) that are orthogonal to each other. A principal component is a linear combination of the original predictor variables which captures the maximum variance in the data set. A downside of the resulting principal components, being a complex mixture of the original features, is that interpreting them can prove difficult.\par
     Usually PCA is used before applying machine learning algorithms. When the input dimension is too high, PCA can speed up the process. It can also combat overfitting by filtering the irrelevant attributes which decrease the performance of some algorithms. Another common use for PCA is data visualisation since understanding two- or three-dimensional data is not as challenging as higher dimensional data.\par
 
 
@@ -71,7 +71,7 @@
     The dataset contains a “target class” attribute explaining which samples are pulsar stars and which are not. In practice, almost all detections are caused by radio frequency interference (RFI) and noise, making legitimate signals hard to find. HTRU2 contains 16,259 spurious examples caused by RFI/noise, and 1,639 real pulsar examples. I’ll be plotting the “target” attribute against the others in order to find pulsar stars.\cite{htru2}
 
     \subsection{What are pulsar stars?}
-    Pulsars are a rare type of Neutron star meaning they are exceptionally small and dense. Their interesting properties make them a significant point of interest for a plethora of scientists.
+    Pulsars are a rare type of neutron star meaning they are exceptionally small and dense. Their curious properties make them a significant point of interest for a plethora of scientists.
 
     \begin{figure}[ht]
         \centering
@@ -83,7 +83,7 @@
     \newpage
 
     \subsection{Properties}
-    Pulsars radiate two steady, narrow beams of light in opposite directions. Although the light from the beam is steady, pulsars appear to flicker because they also spin. It’s often compared to when a lighthouse appears to blink when seen by a sailor on the ocean: as the pulsar rotates, the beam of light may sweep across the Earth, then swing out of view, then swing back around again.\cite{pulsarSpace}\par
+    Pulsars radiate two steady, narrow beams of light in opposite directions (see Figure ~\ref{fig:pulsar}). Although the light from the beam is steady, pulsars appear to flicker because they also spin. It’s often compared to when a lighthouse appears to blink when seen by a sailor on the ocean: as the pulsar rotates, the beam of light may sweep across the Earth, then swing out of view, then swing back around again.\cite{pulsarSpace}\par
 
     \begin{figure}[ht]
         \centering
@@ -104,7 +104,7 @@
 
     \subsection{Attributes}
     \subsubsection{Integrated pulse profile (folded profile)}
-    Pulsars produce periodic pulsation signals which are often too weak to detect. Integrated pulsar signals (with respect to its rotational period) increase the signal quality and form integrated pulse profile. Pulsars are distinguished by their \textit{integrated pulse profiles} – all pulsars have their unique profile shape, similar to human’s fingerprints. \cite{integratedProfile} \\
+    Pulsars produce periodic pulsation signals which are often too weak to detect. Integrated pulsar signals increase the signal quality and form its integrated pulse profile. Pulsars are distinguished by their \textit{integrated pulse profiles} – all pulsars have their unique profile shape, similar to human’s fingerprints. \cite{integratedProfile} \\
     The HTRU2 dataset includes:
     \begin{enumerate}
         \item Mean of the integrated profile
@@ -143,11 +143,11 @@
     For this project I used \textit{IPython} alongside \textit{Jupyter Notebook} for applying PCA, plotting projections, and documenting the process using markdown language. The libraries I relied on were:
     \begin{itemize}
         \item \textbf{pandas} for data manipulation. Pandas supplied me with an appealing way to visualise two dimensional matrices and to modify a dataset in terms of a table with an index and columns.
-        \item \textbf{numpy} for the large collection of high-level mathematical functions they provide. Pandas works closely with numpy for handing multi-dimensional arrays.
+        \item \textbf{NumPy} for the large collection of high-level mathematical functions they provide. Pandas works closely with NumPy for handling multi-dimensional arrays.
         \item \textbf{scikit-learn} because it features various classification, regression and clustering algorithms including PCA.
-        \item \textbf{matplotlib} to plot the results.
+        \item \textbf{Matplotlib} to plot the results.
     \end{itemize}
-    Furthermore, Python was the best choice for me since I've extensively used pandas and numpy in my experience prior university. All the code I wrote for this project can be found in my \href{https://github.com/MarchiT/pulsar-pca}{GitHub} repository.
+    Furthermore, Python was the best choice for me since I've extensively used pandas and NumPy in my experience prior university. All the code I wrote for this project can be found in my \href{https://github.com/MarchiT/pulsar-pca}{GitHub} repository.
     \newpage
 
     \section{Pre-processing of the data}
@@ -286,7 +286,7 @@
         \label{fig:insights}
     \end{figure}
 
-    The results of plotting projections of the data onto pairs of its existing dimensions can be seen on Figure ~\ref{fig:insights}. Since the number of spurious examples in the dataset is significantly larger than the true stars, I had to limit the y axis so the overlap can be shown more clearly in the plots. \par
+    Figure ~\ref{fig:insights} shows the results of plotting projections of the data onto pairs of its existing dimensions. Since the number of spurious examples in the dataset is significantly larger than the true stars, I had to limit the y axis so the overlap can be shown more clearly in the plots. \par
     The projections reveal that the \textbf{DM-SNR curve} values don’t hold much essential information due to the targets mostly overlapping in said plots. Both targets describe similar values for their DM-SNR curves therefore using only the DM-SNR curve data won’t be enough to distinguish noise from a real pulsar star using PCA. \par
     Observing the \textbf{integrated profile} plots shows us that there’s a difference in the two targets. The \textit{skewness} and \textit{excess kurtosis} of the integrated profile for the pulsar stars seem to be generally higher than the spurious stars. The \textit{mean} and the \textit{standard deviation} on the other hand usually take on lower values for the pulsars. The integrated profile features will prove more crucial and will contribute more when applying PCA. This shows us that the data is potentially less dimensional than it appears to be.
 
@@ -354,12 +354,12 @@
 
     \newpage
 
-    The eigenvalues plot on Figure ~\ref{fig:eigenvalues-plot} clearly shows that the first 3 eigenvalues explain most of the data. After calculating the explained variance ratio, we can see that the 1\textsuperscript{st}, 2\textsuperscript{nd}, and 3\textsuperscript{rd} principal components reveal 52\%, 79\%, 89\% of the data respectively (see Figure ~\ref{fig:eigenvalues-plot-percent}). Thus, by using the first 3 components for the final projection, the plot would have access to nearly 90\% of the information.
+    The eigenvalues plot on Figure ~\ref{fig:eigenvalues-plot} clearly shows that the first 3 eigenvalues explain most of the data. After calculating the explained variance ratio, we can see that the first one, two, and three principal components reveal 52\%, 79\%, and 89\% of the data respectively (see Figure ~\ref{fig:eigenvalues-plot-percent}). Thus, by using the first three components for the final projection, the plot would have access to nearly 90\% of the information.
 
     \begin{figure}[ht!]
         \centering
         \includegraphics[width=.75\textwidth]{eigen-percent}
-        \caption{\% Explained variance}
+        \caption{\% explained variance}
         \label{fig:eigenvalues-plot-percent}
     \end{figure}
 
@@ -382,8 +382,11 @@
     \newpage
 
     \subsection{Explaining the projections}
+    Plotting onto the first two components shows a separation between spurious and pulsar stars while still having some ambiguous points on the overlap in between the two target classes. Adding the third component further lowers the ambiguity and gives us a clear idea of identifying a pulsar. This tells us that the initial 8-dimensional data, as a matter of fact, only needs three dimensions to accurately display a pulsar candidate.
 
     \section{Conclusion}
+    PCA can essentially reveal the type of dataset we have – whether all dimensions are impactful to the final result or if the data is, in fact, simpler than what we’re initially presented with. If a dataset is too complex, a further algorithm can be applied to the already processed data in order to reach the desired output. PCA is a powerful tool that can simplify complex data and help us visualise it effectively.\par
+    In conclusion, PCA proved successful in reducing the dimensionality of my dataset, confirming my prior predictions. The final projections show a clear separation and can help distinguish a pulsar star when a new sample is compared with the data.
 
     \newpage
 
